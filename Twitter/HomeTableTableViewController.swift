@@ -77,6 +77,9 @@ class HomeTableTableViewController: UITableViewController {
             cell.profileImgView.image = UIImage(data: imgData)
         }
         
+        cell.setFavor(tweetArr[indexPath.row]["favorited"] as! Bool)
+        cell.tweetId = tweetArr[indexPath.row]["id"] as! Int
+        cell.setRetweeted(tweetArr[indexPath.row]["retweeted"] as! Bool)
         return cell
     }
     
@@ -91,7 +94,11 @@ class HomeTableTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        loadTweet()
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
